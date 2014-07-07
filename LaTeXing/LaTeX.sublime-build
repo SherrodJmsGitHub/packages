@@ -1,0 +1,37 @@
+{
+	"target": "compiler",
+	"selector": "text.tex.latex",
+	"osx":
+	{
+		"cmd":
+		[
+			"latexmk", "-f", "-quiet", "-pdf",
+			"-synctex=#!TEX{synctex}",
+			"-jobname=#!TEX{pdfname}",
+			"-outdir=#!TEX{outdir}",
+			"#!TEX{file}" 
+		],
+		"path": "$PATH:/usr/texbin:/usr/local/bin:/opt/local/bin",
+		"file_regex": "^(?:W|E|B):\\s(.*):([0-9]+)"
+	},
+	"windows":
+	{
+		"cmd":
+		[
+			"latexmk", "-f", "-quiet", "-pdf",
+			"-synctex=#!TEX{synctex}",
+			"-jobname=#!TEX{pdfname}",
+			"-outdir=#!TEX{outdir}",
+			"#!TEX{file}"
+		],
+		"path": "C:\\MikTeX\\miktex\\bin\\win32;$PATH",
+		"file_regex": "^(?:W|E|B):\\s(.*):([0-9]+)"
+	},
+	"variants": 
+	[
+		{
+			"name": "Clean up Files", 
+			"target": "clean"
+		}
+	]
+}

@@ -1,0 +1,8 @@
+handler added for:9845d2474b873dc02e19b7d7e9350849ba6abe4b
+entered add
+ item:
+{'content': u'item', 'due_date': 'null', 'collapsed': 0, 'priority': 0}
+query_arg:content=item&due_date=null&collapsed=0&priority=0&token=9845d2474b873dc02e19b7d7e9350849ba6abe4b
+query_string:https://api.todoist.com/API/addItem?content=item&due_date=null&collapsed=0&priority=0&token=9845d2474b873dc02e19b7d7e9350849ba6abe4b
+response:
+{"due_date": null, "assigned_by_uid": 1103987, "is_archived": 0, "labels": [], "sync_id": null, "in_history": 0, "has_notifications": 0, "date_added": "Mon 02 Jun 2014 18:10:32 +0000", "indent": 1, "children": null, "content": "item", "is_deleted": 0, "user_id": 1103987, "due_date_utc": null, "id": 136946585, "priority": 0, "item_order": 13, "responsible_uid": null, "project_id": 110392896, "collapsed": 0, "checked": 0, "date_string": ""}

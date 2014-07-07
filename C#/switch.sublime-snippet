@@ -1,0 +1,25 @@
+<snippet>
+	<content><![CDATA[
+switch ($1){
+    case $2:
+	//case 1 procedure
+    break;
+    
+    case $3:
+    //case 2 procedure
+    break;
+
+    case $4:
+    //case 3 procedure
+    break;
+
+    default:
+     
+    break;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>switchcase</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.cs</scope>
+</snippet>

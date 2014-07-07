@@ -1,0 +1,318 @@
+[
+	{ 
+		"keys": ["ctrl+l", "ctrl+l"],
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		],
+		"command": "fill"
+	},
+	{ 
+		"keys": ["shift+ctrl+l", "shift+ctrl+l"],
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		],
+		"command": "fill_anywhere"
+	},
+	{
+		"keys": ["ctrl+l", "ctrl+k"],
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		],
+		"command": "open"
+	},
+	{	
+		"keys": ["ctrl+l", "ctrl+o"],
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		],
+		"command": "open_pdf"
+	},
+	{	
+		"keys": ["ctrl+l", "ctrl+j"], 
+		"context":
+		[
+			{	"key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		],
+		"command": "jump_to_pdf"
+	},
+	{
+		"keys": ["ctrl+l", "ctrl+r"],
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex.ing, text.bibtex" }
+		],
+		"command": "bibsonomy_import" 
+	},
+	{
+		"keys": ["ctrl+l", "ctrl+t"], 
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		],
+		"command": "toggle_preferences"
+	},
+	{ 
+		"keys": ["ctrl+l", "ctrl+d"],
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		],
+		"command": "online_lookup"
+	},
+	{
+		"keys": ["ctrl+l", "ctrl+b"],
+		"context":  
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		],
+		"command": "show_overlay", "args": { "overlay": "command_palette", "text": "Build: " }
+	},
+	{
+		"keys": ["ctrl+l", "ctrl+s"],
+		"context":  
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		],
+		"command": "show_overlay", "args": { "overlay": "command_palette", "text": "Snippet: " }
+	},
+	{ 
+		"keys": ["ctrl+l", "ctrl+p"],
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		],
+		"command": "show_overlay", "args": { "overlay": "command_palette", "text": "LaTeXing: " }
+	},
+
+	// LaTeX Commands
+	
+	{ 
+		"keys": ["ctrl+l", "ctrl+c", "b"], 
+		"context":  
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		],
+		"command": "insert_snippet", "args": { "name":"Packages/LaTeXing/snippets/wrapper/textbf.sublime-snippet" }
+	},
+	{ 
+		"keys": ["ctrl+l", "ctrl+c", "e"], 
+		"context":  
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		],
+		"command": "insert_snippet", "args": { "name":"Packages/LaTeXing/snippets/wrapper/emph.sublime-snippet" }
+	},
+	{ 
+		"keys": ["ctrl+l", "ctrl+c", "u"], 
+		"context":  
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		],
+		"command": "insert_snippet", "args": { "name":"Packages/LaTeXing/snippets/wrapper/underline.sublime-snippet" }
+	},
+	// Trigger fill after open bracket
+	{
+		"keys": ["{"],
+		"context":  
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+			{ "key": "preceding_text", "operator": "regex_contains", "operand": "\\\\((includegraphics.*)|(input|include|subfile)|(bibliography)|((no)?cite\\w*\\*?)|(\\w*ref)|([Ii]?ac[uplsf]?[suip]?(de)?\\*?)|(usepackage))(\\[[^]]*\\])*", "match_all": true }
+		],
+		"command": "run_macro_file", 
+		"args": { "file": "Packages/LaTeXing/macros/Trigger Fill With {.hidden-sublime-macro" }
+	},
+	{	
+		"keys": [","],
+		"context":  
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+			{ "key": "preceding_text", "operator": "regex_contains", "operand": "\\\\(((no)?cite\\w*\\*?)|(bibliography)|(usepackage))(\\[[^]]*\\])*\\{([^{},]*,)*[^{},]+$", "match_all": true }
+		],
+		"command": "run_macro_file", 
+		"args": { "file": "Packages/LaTeXing/macros/Trigger Fill With ,.hidden-sublime-macro" }
+	},
+	{
+		"keys": ["ctrl+enter"],
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		],
+		"command": "insert_snippet",
+		"args": { "contents": "\\\\\\\\\n" }
+	},
+	// Auto add of a new \item withing a list environment
+	{
+		"keys": ["shift+enter"],
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.function.environment.list.latex" },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true }
+		],
+		"command": "insert_snippet",
+		"args": { "contents": "\n\\item $0" }
+	},
+	{
+		"keys": ["shift+enter"],
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex.beamer meta.function.environment.frame meta.function.environment.list.latex" },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true }
+		],
+		"command": "insert_snippet",
+		"args": { "contents": "\n\\item<$1> $0" }
+	},
+	// Auto-pair quotes
+	{
+		"keys": ["'"], 
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true }
+		],
+		"command": "insert_snippet",
+		"args": { "contents": "`${0:$SELECTION}'" }
+	},
+	{ 
+		"keys": ["'"], 
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+			{ "key": "eol_selector", "operator": "not_equal", "operand": "comment.line.percentage", "match_all": true },
+		 	{ "key": "preceding_text", "operator": "regex_contains", "operand": "(^|[^\\w])$", "match_all": true }
+		],
+		"command": "insert_snippet",
+		"args": { "contents": "`$0'" }
+	},
+	{ 
+		"keys": ["'"], 
+		"context":
+		[	
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+			{ "key": "following_text", "operator": "regex_contains", "operand": "^'[^']", "match_all": true }
+		],
+		"command": "move", 
+		"args": { "by": "characters", "forward": true}
+	},
+	{ 
+		"keys": ["'"], 
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "string.quoted.double" },
+			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true }
+		],
+		"command": "insert_snippet",
+		"args": { "contents": "''$0" }
+	},
+	{ 
+		"keys": ["backspace"],
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+			{ "key": "preceding_text", "operator": "regex_contains", "operand": "`$", "match_all": true },
+			{ "key": "following_text", "operator": "regex_contains", "operand": "^'", "match_all": true }
+		],
+		"command": "run_macro_file", 
+		"args": { "file": "Packages/Default/Delete Left Right.hidden-sublime-macro" }
+	},
+	// Auto-pair double quotes
+	{
+		"keys": ["\""], 
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true }
+		],
+		"command": "insert_snippet",
+		"args": { "contents": "``${0:$SELECTION}''" }
+	},
+	{ 
+		"keys": ["\""], 
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+			{ "key": "eol_selector", "operator": "not_equal", "operand": "comment.line.percentage", "match_all": true },
+		 	{ "key": "preceding_text", "operator": "regex_contains", "operand": "(^|[^\\w])$", "match_all": true }
+		],
+		"command": "insert_snippet",
+		"args": { "contents": "``$0''" }
+	},
+	{ 
+		"keys": ["\""], 
+		"context":
+		[	
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+			{ "key": "following_text", "operator": "regex_contains", "operand": "^''", "match_all": true }
+		],
+		"command": "run_macro_file", 
+		"args": { "file": "Packages/LaTeXing/macros/Move Two Characters.hidden-sublime-macro" }
+	},
+	{ 
+		"keys": ["\""], 
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex string.quoted.double" },
+			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true }
+		],
+		"command": "insert_snippet",
+		"args": { "contents": "''$0" }
+	},
+	{ 
+		"keys": ["backspace"],
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+			{ "key": "preceding_text", "operator": "regex_contains", "operand": "``$", "match_all": true },
+			{ "key": "following_text", "operator": "regex_contains", "operand": "^''", "match_all": true }
+		],
+		"command": "run_macro_file", 
+		"args": { "file": "Packages/LaTeXing/macros/Delete Two Left Right.hidden-sublime-macro" }
+	},
+	// Auto type underscore character
+	{ 
+		"keys": ["_"], 
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+			{ "key": "selector", "operator": "not_equal", "operand": "string.other.math" },
+			{ "key": "selector", "operator": "not_equal", "operand": "constant.character.escape.tex" },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },			
+			{ "key": "preceding_text", "operator": "not_regex_contains", "operand": "\\$", "match_all": true },
+			{ "key": "eol_selector", "operator": "not_equal", "operand": "comment.line.percentage", "match_all": true }
+		],
+		"command": "insert_snippet",
+		"args": { "contents": "\\\\_" }
+	},
+	{ 
+		"keys": ["backspace"],
+		"context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+			{ "key": "preceding_text", "operator": "regex_contains", "operand": "\\\\_$", "match_all": true }
+		],
+		"command": "run_macro_file", 
+		"args": { "file": "Packages/LaTeXing/macros/Delete Two Left.hidden-sublime-macro" }
+	}
+]

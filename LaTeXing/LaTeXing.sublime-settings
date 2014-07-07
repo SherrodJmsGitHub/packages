@@ -1,0 +1,42 @@
+{
+	"username": "",
+	"license": "",
+
+	"debug": true,
+
+	"keep_focus": true,
+	"forward_sync": true,
+	"reverse_sync": true,
+
+	"root_option": true,
+	"open_pdf_on_load": true,
+
+	"output_directory": "Output",
+	"pdf_name_abs_output_directory": true,
+
+	"currfile_graphicspath": false,
+	"graphics_include_patterns": ["*.jpeg", "*.jpg", "*.png", "*.eps", "*.pdf"],
+	"input_include_patterns": ["*.tex", "*.TEX"],
+	"bibliography_include_patterns": ["*.bib", "*.BIB"],
+	
+	"auto_trigger": true,
+	"static_cwl": ["tex.cwl", "latex-209.cwl", "latex-dev.cwl", "latex-document.cwl", "latex-l2tabu.cwl", "latex-mathsymbols.cwl"],
+	"dynamic_cwl": true,
+
+	"pkg_reload_interval": 24,
+
+	"bibsonomy": false,
+	"bibsonomy_username": "",
+	"bibsonomy_apikey": "", 
+	"bibsonomy_bibname": "Bibsonomy.bib",
+
+	"online_lookup": [
+		{ "title": "Dict.cc", "url": "http://www.dict.cc/?s=%s" },
+		{ "title": "Dict.leo.org","url": "http://dict.leo.org/ende?search=%s" },
+		{ "title": "Dictionary.com","url": "http://dictionary.reference.com/browse/%s" },
+		{ "title": "Linguee.com EN-DE",	"url": "http://www.linguee.com/english-german/search?query=%s" },
+		{ "title": "Linguee.de DE-EN", "url": "http://www.linguee.de/deutsch-englisch/search?query=%s" },
+		{ "title": "Pons.eu", "url": "http://en.pons.eu/dict/search/results/?q=%s&l=deen" },
+		{ "title": "Thesaurus.com", "url": "http://thesaurus.com/browse/%s" }
+	]
+}

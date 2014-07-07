@@ -1,0 +1,18 @@
+<snippet>
+	<content><![CDATA[
+/**	
+	@brief $1
+
+	@details $2
+
+	@param[out] $3.
+	@param[in] $4.
+	@param[in] $5	
+
+*/
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>docfunc</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

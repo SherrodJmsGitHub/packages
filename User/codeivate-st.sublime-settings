@@ -1,0 +1,14 @@
+{
+	"dialog": false,
+	"growl_active": true,
+	"machine_name":
+	{
+		"156977153150": "CLS-PC"
+	},
+	"notify_send_active": true,
+	"notify_send_path": "/usr/bin/notify-send",
+	"pushover_active": false,
+	"pushover_user_id": "",
+	"user_id": "28a29280fbbf140fd72d689ff566a69374a0b042",
+	"user_token": "f7b7a5f6ed6e979264727701a77cf2620887124e"
+}

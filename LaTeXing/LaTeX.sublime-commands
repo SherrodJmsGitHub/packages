@@ -1,0 +1,42 @@
+[
+	{ 
+		"caption": "LaTeXing: Open PDF", 
+		"command": "open_pdf"
+	},
+	{ 
+		"caption": "LaTeXing: Jump To PDF", 
+		"command": "jump_to_pdf"
+	},
+	{
+		"caption": "LaTeXing: Check System", 
+		"command": "check_system"
+	},
+	{ 
+		"caption": "LaTeXing: Bibsonomy",
+		"command": "bibsonomy_import" 
+	},
+	{ 
+		"caption": "LaTeXing: Texcount", 
+		"command": "texcount"
+	},
+	{ 
+		"caption": "LaTeXing: Toggle Preferences", 
+		"command": "toggle_preferences"
+	},
+	{ 
+		"caption": "LaTeXing: Documentation", 
+		"command": "ltx_open_documentation"
+	},
+	{ 
+		"caption": "LaTeXing: Buy a License",
+		"command": "buy_license"
+	},
+	{ 
+		"caption": "LaTeXing: Open Default Preferences", 
+		"command": "open_file", "args": { "file": "${packages}/LaTeXing/LaTeXing.sublime-settings" }
+	},
+	{ 
+		"caption": "LaTeXing: Open User Preferences", 
+		"command": "open_file", "args": { "file": "${packages}/User/LaTeXing.sublime-settings" }
+	}
+]
