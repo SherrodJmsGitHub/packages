@@ -58,7 +58,7 @@ class PrettyJsonBaseCommand(sublime_plugin.TextCommand):
         return json.dumps(obj,
                           indent=s.get("indent", 2),
                           ensure_ascii=s.get("ensure_ascii", False),
-                          sort_keys=s.get("sort_keys", False),
+                          sort_keys=s.get("sort_keys", True),
                           separators=(',', ': '),
                           use_decimal=True)
 

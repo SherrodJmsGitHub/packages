@@ -1,4 +1,12 @@
 {
+	"C:\\Users\\CLS\\AppData\\Roaming\\Sublime Text 2\\Packages\\Default":
+	[
+		{
+			"file_name": "C:\\Users\\CLS\\AppData\\Roaming\\Sublime Text 2\\Packages\\SimpleTODO\\simple_todo.py",
+			"line_number": 9,
+			"text": "for dogears some kind of buffer monitor to adjust bookmarks"
+		}
+	],
 	"C:\\Users\\CLS\\Documents\\CodeLibrary\\openapps\\gtrLib":
 	[
 		{
@@ -194,6 +202,14 @@
 			"file_name": "C:\\Users\\CLS\\Documents\\grocieries\\Groceries.list",
 			"line_number": 1,
 			"text": "bread and buns"
+		}
+	],
+	"c:\\users\\cls\\documents\\codelibrary\\openapps\\glib\\glib":
+	[
+		{
+			"file_name": "c:\\users\\cls\\documents\\codelibrary\\openapps\\glib\\glib\\src\\Gprocessor.cs",
+			"line_number": 126,
+			"text": "get sub set between grouping"
 		}
 	],
 	"c:\\users\\cls\\documents\\codelibrary\\openapps\\glib\\src":

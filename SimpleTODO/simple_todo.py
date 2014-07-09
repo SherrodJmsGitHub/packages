@@ -96,7 +96,6 @@ class SimpleTodoCommand(sublime_plugin.TextCommand):
             TodoistAPI.add_item_async(text, self.get_active_project());
            
             self.save_todo(todo)
-            self.list()
             
 
 

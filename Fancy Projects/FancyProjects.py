@@ -20,10 +20,18 @@
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 import sublime
 import sublime_plugin
+import sys
 import os
+from os.path import join as osjoin
 import json
 from fancyprojects.project_structure import ProjectStructure
 from shutil import copytree
+from shutil import copy
+
+
+
+sys.path.append(os.path.join(sublime.packages_path(), "Pretty Json"));
+from PrettyJson import PrettyJsonBaseCommand as pretty
 
 # This command creates a new project
 class FancyProjectsCreateNewProjectCommand(sublime_plugin.WindowCommand):
@@ -34,11 +42,11 @@ class FancyProjectsCreateNewProjectCommand(sublime_plugin.WindowCommand):
 		self.user_project_path = settings.get("user_project_directory")
 		self.use_sublime_project_format = settings.get("use_sublime_project_format")
 		self.use_counter_if_project_folder_already_exists = settings.get("use_counter_if_project_folder_already_exists")
-
+		self.has_project_proto=False
 
 		# insert packages path
 		self.template_path = os.path.join(sublime.packages_path(), "Fancy Projects", "templates");
-		self.user_project_path=os.path.expanduser("~");
+		self.user_project_path=os.path.join(os.path.expanduser("~"),"Projects");
 
 
 		# get the content of the template folder
@@ -48,7 +56,7 @@ class FancyProjectsCreateNewProjectCommand(sublime_plugin.WindowCommand):
 
 		# get .fancyproj files
 		for item in template_folder_content:
-			if item.split(".")[-1] == "fancyproj":
+			if item.endswith(".fancyproj"):
 				template_folder_items.append(item)
 
 
@@ -61,7 +69,9 @@ class FancyProjectsCreateNewProjectCommand(sublime_plugin.WindowCommand):
 				return
 
 			json_object = json.load(open("%s/%s/fancyproj.json" % (self.template_path, template_item)))
-			project_structure = ProjectStructure(os.path.join(self.template_path, template_item), json_object)
+			project_structure = ProjectStructure(osjoin(self.template_path, template_item), json_object)
+
+			project_structure.check_for_protoproj();
 
 			self.project_structures.append(project_structure)
 
@@ -99,6 +109,10 @@ class FancyProjectsCreateNewProjectCommand(sublime_plugin.WindowCommand):
 
 		# define the paths, which are used for copy
 		source = os.path.join(project_structure.path, "contents")
+
+		
+
+
 		self.project_folder = os.path.join(self.user_project_path, new_project_name)
 		destination = os.path.join(self.user_project_path, new_project_name, project_subfolder)
 
@@ -126,45 +140,82 @@ class FancyProjectsCreateNewProjectCommand(sublime_plugin.WindowCommand):
 					solution_found = True
 		else:
 			self.copy_folder(source, destination, new_project_name)
+		
+		#load project intends to use any custom scripts check for a script folder
+		script_path=os.path.join(project_structure.path, "scripts");
+
+		if os.path.exists(script_path):
+		 	copytree(script_path, osjoin(self.project_folder,"scripts"));
+
 
 	def copy_folder(self, source, destination, project_name):
 		copytree(source, destination)
 
-		if self.use_sublime_project_format:
+		if self.use_sublime_project_format:			
 			self.create_project_file(project_name)
 
+
+
+	def copy_project_proto(self, project_name):
+		copy(self.picked_project_structure.proto_file, self.project_folder);
+
+
+
 	def create_project_file(self, project_name):
-		f = open(os.path.join(self.project_folder, "%s.sublime-project" % project_name), "w+")
+		fname=osjoin(self.project_folder, "%s.sublime-project" % project_name);
 
-		settings = ""
+		if not self.picked_project_structure.has_project_proto:
+			f = open(fname, "w+")
 
-		for item in self.picked_project_structure.settings:
-			value = self.picked_project_structure.settings[item]
-			settings += "\"%s\": %s," % (item, "\"%s\"" % value if isinstance(value, str) else value)
+			#create folder for any buildscripts
+			#os.makedirs(os.path.join(self.project_folder,"buildscripts"));
 
-		if settings.endswith(","):
-			settings = settings[:-1]
+			settings = ""
 
-		build_systems = ""
+			for item in self.picked_project_structure.settings:
+				value = self.picked_project_structure.settings[item]
+				settings += "\"%s\": %s," % (item, "\"%s\"" % value if isinstance(value, str) else value)
 
-		for bsystem in self.picked_project_structure.build_systems:
-			build_systems += "{"
+			if settings.endswith(","):
+				settings = settings[:-1]
 
-			for item in bsystem:
-				value = bsystem[item]
-				print value, type(value)
-				build_systems += "\"%s\": %s," % (item, "\"%s\"" % value if isinstance(value, unicode) or isinstance(value, str) else value)
+			build_systems = ""
+
+			for bsystem in self.picked_project_structure.build_systems:
+				build_systems += "{"
+
+				for item in bsystem:
+					value = bsystem[item]
+					print value, type(value)
+					build_systems += "\"%s\": %s," % (item, "\"%s\"" % value if isinstance(value, unicode) or isinstance(value, str) else value)
+
+				if build_systems.endswith(","):
+					build_systems = build_systems[:-1]
+
+				build_systems += "},"
 
 			if build_systems.endswith(","):
 				build_systems = build_systems[:-1]
 
-			build_systems += "},"
+			f.write("{\"folders\":[{\"path\":\"%s\"}], \"settings\":{%s}, \"build_systems\":[%s]}" % (project_name, settings, build_systems))
+			f.close()
+		else:
+			#load the prototype as a json object
+			print self.picked_project_structure.proto_file
+			json_object = json.load(open(self.picked_project_structure.proto_file,'r'));
+			
+			project_folder=self.project_folder.lower();
 
-		if build_systems.endswith(","):
-			build_systems = build_systems[:-1]
+			# make sure all paths in the project file a nix style paths
+			if os.name=="nt":
+				project_folder=project_folder.replace("\\", "/").replace("c:", "/c")
 
-		f.write("{\"folders\":[{\"path\":\"%s\"}], \"settings\":{%s}, \"build_systems\":[%s]}" % (project_name, settings, build_systems))
-		f.close()
+			json_object["folders"][0]["path"]=project_folder;
+
+			#dump the fname
+			with open(fname, 'w') as f:
+				f.write(unicode(pretty.json_dumps(json_object)))
+
 
 # This command opens the template folder
 class FancyProjectsOpenTemplateFolderCommand(sublime_plugin.WindowCommand):

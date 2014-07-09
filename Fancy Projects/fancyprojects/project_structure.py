@@ -18,6 +18,8 @@
 # HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+import os
+
 class ProjectStructure:
 	def __init__(self, path, json):
 		self.path = path
@@ -26,9 +28,23 @@ class ProjectStructure:
 		self.default_project_name = json["default_project_name"]
 		self.settings = json["settings"]
 		self.build_systems = json["build_systems"]
+		self.has_project_proto=False
+		self.proto_file=""
+
 
 	def to_quickpanel_item(self):
 		return [self.name, self.description]
 
+
 	def __str__(self):
 		return self.name
+
+
+	def check_for_protoproj(self):
+			items=os.listdir( self.path );
+
+			for item in items:
+				if item.endswith(".project-proto"):
+					self.has_project_proto=True;
+					self.proto_file=os.path.join(self.path,item);
+					break;
